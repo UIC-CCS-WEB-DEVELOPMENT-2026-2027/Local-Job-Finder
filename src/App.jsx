@@ -29,6 +29,8 @@ function App() {
                 <th>Location</th>
                 <th>Job Type</th>
                 <th>Salary</th>
+                <th>Contact No.</th>
+                <th>Email</th>
                 <th>Status</th>
               </tr>
             </thead>
@@ -42,6 +44,19 @@ function App() {
                     <td>{job.jobType}</td>
                     <td className="cell-salary">{job.salary}</td>
                     <td>
+                      <a
+                        className="cell-link"
+                        href={`tel:${job.contactNo.replace(/\s+/g, "")}`}
+                      >
+                        {job.contactNo}
+                      </a>
+                    </td>
+                    <td>
+                      <a className="cell-link" href={`mailto:${job.email}`}>
+                        {job.email}
+                      </a>
+                    </td>
+                    <td>
                       <span
                         className={`status status-${job.status.toLowerCase()}`}
                       >
@@ -52,7 +67,7 @@ function App() {
                 ))
               ) : (
                 <tr>
-                  <td className="empty-state" colSpan="6">
+                  <td className="empty-state" colSpan="8">
                     No jobs listed yet.
                   </td>
                 </tr>

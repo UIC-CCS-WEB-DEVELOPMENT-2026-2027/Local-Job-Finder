@@ -88,7 +88,7 @@ body {
 }
 table {
     width: 100%;
-    min-width: 820px;
+    min-width: 1180px;
     border-collapse: collapse;
     text-align: left;
 }
@@ -122,6 +122,19 @@ tbody tr:last-child td {
 }
 .cell-salary {
     font-variant-numeric: tabular-nums;
+}
+.cell-link {
+    color: #1d4ed8;
+    text-decoration: none;
+    font-variant-numeric: tabular-nums;
+}
+.cell-link:hover {
+    text-decoration: underline;
+}
+.cell-link:focus-visible {
+    outline: 2px solid #1d4ed8;
+    outline-offset: 2px;
+    border-radius: 2px;
 }
 
 .status {
