@@ -1,0 +1,50 @@
+.not-current {
+  border: 1px solid black;
+}
+
+.current {
+  border: 1px solid white;
+}
+
+.nav-button {
+  background-color: orange;
+  padding: 8px;
+  border-radius: 5px;
+  text-decoration: none;
+  color: black;
+}
+
+.nav-button:active {
+    background-color: black;
+}
+
+.nav-button:hover{
+  color: white;
+}
+
+.navbar {
+  z-index: 2;
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 30px;
+  top: 0;
+  left: 0;
+  background-color: rgb(37, 37, 37);
+  padding: 15px;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 0 20px 0 0;
+  gap: 10px;
+}
+
+img {
+  height: auto;
+  width: 100%;
+}
