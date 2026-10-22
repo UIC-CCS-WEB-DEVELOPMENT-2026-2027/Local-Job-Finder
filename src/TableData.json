@@ -1,0 +1,46 @@
+[
+  {
+    "id": 1,
+    "title": "Sales Associate",
+    "company": "ABC Retail Store",
+    "location": "Davao City",
+    "jobType": "Full-time",
+    "salary": "₱15,000–₱18,000/month",
+    "status": "Open",
+    "contactNo": "0917 123 4501",
+    "email": "hr@abcretail.example.com"
+  },
+  {
+    "id": 2,
+    "title": "Barista",
+    "company": "Daily Brew Cafe",
+    "location": "Davao City",
+    "jobType": "Part-time",
+    "salary": "₱500–₱600/day",
+    "status": "Open",
+    "contactNo": "0918 234 5602",
+    "email": "hiring@dailybrew.example.com"
+  },
+  {
+    "id": 3,
+    "title": "Customer Service Representative",
+    "company": "Local Connect Services",
+    "location": "Tagum City",
+    "jobType": "Full-time",
+    "salary": "₱18,000–₱22,000/month",
+    "status": "Open",
+    "contactNo": "0919 345 6703",
+    "email": "careers@localconnect.example.com"
+  },
+  {
+    "id": 4,
+    "title": "Delivery Rider",
+    "company": "QuickDrop Delivery",
+    "location": "Panabo City",
+    "jobType": "Contract",
+    "salary": "₱600–₱900/day",
+    "status": "Closed",
+    "contactNo": "0920 456 7804",
+    "email": "riders@quickdrop.example.com"
+  }
+]
