@@ -1,32 +1,3 @@
-:root {
-    font-family:
-        Inter,
-        system-ui,
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        sans-serif;
-    color: #1f2937;
-    background: #f3f6fa;
-    color-scheme: light;
-    font-synthesis: none;
-    text-rendering: optimizeLegibility;
-}
-
-body {
-    margin: 50px 0 0 0;
-    min-width: 320px;
-}
-
-/* index.css narrows #root to 1126px, adds side borders and centers text.
-   Reset that here so the table can use the full page width. */
-#root {
-    width: 100%;
-    max-width: 100%;
-    border-inline: 0;
-    text-align: left;
-}
-
 .container {
     margin: 0 15px;
     padding: 28px 0 56px;
