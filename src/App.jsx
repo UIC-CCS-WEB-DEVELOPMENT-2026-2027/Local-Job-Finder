@@ -7,7 +7,7 @@ function App() {
   return (
     <>
       <BrowserRouter>
-
+      
           <Routes>
             <Route path = "/" element = {<JobBoard />} />
             <Route path = "/job-board" element = {<JobBoard />} />
