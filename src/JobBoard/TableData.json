@@ -8,7 +8,7 @@
     "status": "Close",
     "contactNo": "0917 123 4501",
     "email": "hr@abcretail.example.com"
-  }
+  },
 {
   "id": 2,
   "title": "Gardener",
@@ -18,7 +18,7 @@
   "status": "Open",
   "contactNo": "0921 678 3401",
   "email": "dementius.example.com"
-}
+},
  {
   "id": 3,
   "title": "Cook",

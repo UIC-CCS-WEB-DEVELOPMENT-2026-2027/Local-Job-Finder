@@ -21,21 +21,7 @@ function JobBoard() {
         </div>
 
         <div className="table-wrapper">
-          <table>
-            <thead>
-              <tr>
-                <th>Job Title</th>
-                <th>Company</th>
-                <th>Location</th>
-                <th>Job Type</th>
-                <th>Salary</th>
-                <th>Contact No.</th>
-                <th>Email</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              {jobs.length > 0 ? (
+            {jobs.length > 0 ? (
                 jobs.map((job) => (
                   <tr key={job.id}>
                     <td className="cell-title">{job.title}</td>
@@ -66,14 +52,10 @@ function JobBoard() {
                   </tr>
                 ))
               ) : (
-                <tr>
-                  <td className="empty-state" colSpan="8">
+                  <h1 className="empty-state">
                     No jobs listed yet.
-                  </td>
-                </tr>
+                  </h1>
               )}
-            </tbody>
-          </table>
         </div>
       </section>
     </main>
