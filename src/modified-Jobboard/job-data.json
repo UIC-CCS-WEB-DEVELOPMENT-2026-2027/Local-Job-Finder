@@ -1,0 +1,24 @@
+[
+  {
+  "id": 1,
+  "title": "Cleaner",
+  "description": "Wash, sweep the floor, and clean hard-to-reach areas.",
+  "address": "Bankerohan, blk 16",
+  "payment": "₱250 per 2 hours",
+  "status": "Closed",
+  "ownerId": "demo-user",
+  "contactNo": "0917 123 4501",
+  "email": "hr@abcretail.example.com"
+},
+{
+  "id": 2,
+  "title": "Gardener",
+  "description": "Remove excessive grass and weeds from the garden.",
+  "address": "Torres, blk 12",
+  "payment": "₱200-₱300",
+  "status": "Open",
+  "ownerId": "demo-user",
+  "contactNo": "0921 678 3401",
+  "email": "dementius.example.com"
+}
+]
