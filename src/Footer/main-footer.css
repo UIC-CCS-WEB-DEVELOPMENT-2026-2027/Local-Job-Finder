@@ -6,10 +6,6 @@
   padding: 22px max(20px, calc((100% - 1120px) / 2));
   background: #252525;
   color: white;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  position: fixed;
 }
 .footer-links,
 .footer-social {
