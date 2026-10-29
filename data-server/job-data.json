@@ -1,0 +1,69 @@
+{
+  "jobs": [
+    {
+      "id": "1",
+      "title": "Cleaner",
+      "description": "Wash, Sweeping the floor, and cleaning the hidden dirt",
+      "address": "Bankerohan, blk 16",
+      "payment": "₱350",
+      "status": "Closed",
+      "ownerID": "user1",
+      "contactNo": "0917 123 4501",
+      "email": "hr@abcretail.example.com"
+    },
+    {
+      "id": "2",
+      "title": "Gardener",
+      "description": "Remove excessive grass and weeds from the garden.",
+      "address": "Torres, blk 12",
+      "payment": "₱100",
+      "status": "Open",
+      "ownerID": "user1",
+      "contactNo": "0921 678 3401",
+      "email": "dementius@example.com"
+    },
+    {
+      "id": "3",
+      "title": "Help with yard cleanup",
+      "description": "Collect leaves and tidy the front yard.",
+      "address": "Buhangin, Davao City",
+      "payment": "₱500",
+      "status": "Open",
+      "ownerID": "user2",
+      "contactNo": "555-0102",
+      "email": "user2@example.com"
+    },
+    {
+      "title": "Fix Drainage",
+      "category": "Plumber",
+      "description": "Fix drainage system",
+      "address": "Toril, Davao City",
+      "schedule": "Oct 29",
+      "payment": "₱1,500",
+      "budgetType": "fixed",
+      "budgetMin": "",
+      "budgetMax": "",
+      "contactNo": "0912 3456 789",
+      "email": "123meme@gmail.com",
+      "status": "Open",
+      "ownerID": "user1",
+      "id": "4"
+    },
+    {
+      "id": "5",
+      "title": "AAA",
+      "category": "AAA",
+      "description": "BBB",
+      "address": "Tigatto, Davao City",
+      "schedule": "November 3, 2026",
+      "payment": "₱5,000",
+      "budgetType": "fixed",
+      "budgetMin": "",
+      "budgetMax": "",
+      "status": "Open",
+      "ownerID": "user1",
+      "contactNo": "0912 3456 789",
+      "email": "aduiuwe@gmail.com"
+    }
+  ]
+}
