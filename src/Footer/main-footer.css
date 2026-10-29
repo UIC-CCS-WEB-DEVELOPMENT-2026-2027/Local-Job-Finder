@@ -3,9 +3,13 @@
   align-items: center;
   justify-content: space-between;
   gap: 18px;
-  padding: 22px max(20px, calc((100% - 1120px) / 2));
+  padding: 12px max(20px, calc((100% - 1120px) / 2));
   background: #252525;
   color: white;
+  position: fixed;
+  z-index: 2;
+  bottom: 0;
+  width: 100%;  
 }
 .footer-links,
 .footer-social {
