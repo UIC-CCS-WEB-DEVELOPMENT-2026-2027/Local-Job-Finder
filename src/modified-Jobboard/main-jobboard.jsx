@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import AuthModal from "../Auth/AuthModal.jsx";
 import sampleUsers from "../sample-data/sample-users.json";
 import Footer from "../Footer/main-footer.jsx";
 import MainHeader from "../modified-header/main-header.jsx";
@@ -7,10 +8,11 @@ import "./main-jobboard.css";
 
 
 const jobsUrl = "http://localhost:3001/jobs";
+const AUTH_STORAGE_KEY = "localifiedAuthUser";
 const usersById = Object.fromEntries(sampleUsers.map((user) => [user.id, user]));
 const sampleApplications = [
-  { id: "sample-user-1-application", taskId: "3", applicantId: "user1", applicant: "User 1", message: "I am available to help with the yard cleanup.", status: "Pending" },
-  { id: "sample-user-2-application", taskId: "1", applicantId: "user2", applicant: "User 2", message: "I can help with this task.", status: "Pending" },
+  { id: "sample-user-1-application", taskId: "3", applicantId: "user1", applicant: "Ana Reyes", message: "I am available to help with the yard cleanup.", status: "Pending" },
+  { id: "sample-user-2-application", taskId: "1", applicantId: "user2", applicant: "Ben Cruz", message: "I can help with this task.", status: "Pending" },
 ];
 const displayPrice = (price) => String(price)
   .replace(/\s+per\s+(?:\d+(?:\.\d+)?\s*)?hours?\b/gi, "")
@@ -26,6 +28,9 @@ const readStored = (key, fallback) => {
   }
 };
 
+const displayName = (user) =>
+  user ? `${user.firstName} ${user.lastName}`.trim() : "Applicant";
+
 const normalizeTask = (task) => ({
   ...task,
   category: task.category || task.title,
@@ -37,7 +42,8 @@ const normalizeTask = (task) => ({
 });
 
 function Marketplace() {
-  const [currentUser, setCurrentUser] = useState("user1");
+  const [authUser, setAuthUser] = useState(() => readStored(AUTH_STORAGE_KEY, null));
+  const [showAuth, setShowAuth] = useState(() => !readStored(AUTH_STORAGE_KEY, null));
   const [tasks, setTasks] = useState([]);
   const [tasksLoading, setTasksLoading] = useState(true);
   const [taskError, setTaskError] = useState("");
@@ -60,6 +66,7 @@ function Marketplace() {
   const [budgetError, setBudgetError] = useState("");
   const [budgetType, setBudgetType] = useState("fixed");
   const [editingTask, setEditingTask] = useState(null);
+  const currentUser = authUser?.id || "";
 
   useEffect(() => {
     fetch(jobsUrl)
@@ -174,7 +181,7 @@ function Marketplace() {
   const apply = (event, task) => {
     event.preventDefault();
     if (task.ownerID === currentUser || task.status !== "Open" || applications.some((item) => item.taskId === String(task.id) && item.applicantId === currentUser)) return;
-    setApplications((current) => [...current, { id: Date.now(), taskId: String(task.id), applicantId: currentUser, applicant: usersById[currentUser]?.name || currentUser, message: message.trim(), status: "Pending" }]);
+    setApplications((current) => [...current, { id: Date.now(), taskId: String(task.id), applicantId: currentUser, applicant: displayName(authUser) || usersById[currentUser]?.name || currentUser, message: message.trim(), status: "Pending" }]);
     setMessage("");
   };
   const review = (application, status) => {
@@ -208,6 +215,44 @@ function Marketplace() {
     if (rating < 1 || rating > 5 || !Number.isInteger(rating)) return;
     setApplications((current) => current.map((item) => item.id === application.id ? { ...item, rating } : item));
   };
+  const handleLogin = (user, remember = true) => {
+    const safeUser = { ...user };
+    delete safeUser.password;
+    setAuthUser(safeUser);
+    setShowAuth(false);
+    if (remember) localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(safeUser));
+    else localStorage.removeItem(AUTH_STORAGE_KEY);
+  };
+  const handleLogout = () => {
+    setAuthUser(null);
+    setShowAuth(true);
+    setView("board");
+    setSelected(null);
+    setEditingTask(null);
+    setEditingApplication(null);
+    localStorage.removeItem(AUTH_STORAGE_KEY);
+  };
+  const handleUpdateUser = (user) => {
+    const safeUser = { ...user };
+    delete safeUser.password;
+    setAuthUser(safeUser);
+    if (localStorage.getItem(AUTH_STORAGE_KEY)) {
+      localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(safeUser));
+    }
+  };
+
+  if (!authUser) {
+    return (
+      <AuthModal
+        required
+        user={null}
+        onClose={() => {}}
+        onLogin={handleLogin}
+        onLogout={handleLogout}
+        onUpdateUser={handleUpdateUser}
+      />
+    );
+  }
 
   return <>
     <MainHeader
@@ -216,6 +261,8 @@ function Marketplace() {
       editingTask={editingTask}
       onBack={() => { setView("board"); navigate("/job-board"); }}
       onBoard={() => setView("board")}
+      user={authUser}
+      onAccount={() => setShowAuth(true)}
     />
     <main className="container">
       {taskError && <p className="form-error" role="alert">{taskError}</p>}
@@ -231,12 +278,12 @@ function Marketplace() {
           <fieldset className="budget-choice wide"><legend>Budget (optional)</legend><div className="budget-options"><label><input type="radio" name="budgetType" checked={budgetType === "fixed"} onChange={() => setBudgetType("fixed")} /> Fixed budget</label><label><input type="radio" name="budgetType" checked={budgetType === "range"} onChange={() => setBudgetType("range")} /> Budget range</label></div>
             {budgetType === "fixed" ? <label>Amount (PHP)<input name="budget" type="number" min="0" step="1" placeholder="e.g. 300" defaultValue={editingTask?.budgetType === "fixed" || (editingTask && !editingTask.budgetType && !editingTask.budgetRange) ? String(editingTask?.budget || "").replace(/[^\d.]/g, "") : ""} /></label> : <div className="budget-range-field"><input name="budgetMin" type="number" min="0" step="1" placeholder="Minimum ₱" aria-label="Minimum budget range in pesos" defaultValue={editingTask?.budgetMin || String(editingTask?.budgetRange || "").split(/[–-]/)[0]?.replace(/[^\d.]/g, "") || ""} /><span>to</span><input name="budgetMax" type="number" min="0" step="1" placeholder="Maximum ₱" aria-label="Maximum budget range in pesos" defaultValue={editingTask?.budgetMax || String(editingTask?.budgetRange || "").split(/[–-]/)[1]?.replace(/[^\d.]/g, "") || ""} /></div>}
           </fieldset>
-          <label>Phone / contact number<input name="contact" type="text" required placeholder="e.g. 09xx xxx xxxx" defaultValue={editingTask?.contactNo || ""} /></label>
-          <label>Email<input name="email" type="email" placeholder="name@example.com" defaultValue={editingTask?.email || ""} /></label>
+          <label>Phone / contact number<input name="contact" type="text" required placeholder="e.g. 09xx xxx xxxx" defaultValue={editingTask?.contactNo || authUser.phone || ""} /></label>
+          <label>Email<input name="email" type="email" placeholder="name@example.com" defaultValue={editingTask?.email || authUser.email || ""} /></label>
           {budgetError && <p className="form-error wide" role="alert">{budgetError}</p>}
           <div className="form-actions wide"><button className="button" type="submit">{editingTask ? "Save changes" : "Publish task"}</button>{editingTask && <button className="button secondary-button" type="button" onClick={() => setEditingTask(null)}>Cancel</button>}</div>
         </form></section> : <>
-        <section className="page-heading"><div><h1>{view === "mine" ? "My activity" : "Local Job Board"}</h1><p>{view === "mine" ? "Jobs you posted and applications you sent." : "Short-term work and errands in your community."}</p></div>{view !== "mine" && <div className="heading-actions"><button className="nav-activity" onClick={() => setCurrentUser(currentUser === "user1" ? "user2" : "user1")}>{currentUser === "user1" ? "Switch User 2" : "Switch User 1"}</button><button className="nav-activity" onClick={() => setView("mine")}>My Activity{applications.some((item) => item.status === "Pending" && tasks.some((task) => String(task.id) === String(item.taskId) && task.ownerID === currentUser)) ? " •" : ""}</button></div>}</section>
+        <section className="page-heading"><div><h1>{view === "mine" ? "My activity" : "Local Job Board"}</h1><p>{view === "mine" ? "Jobs you posted and applications you sent." : "Short-term work and errands in your community."}</p></div>{view !== "mine" && <div className="heading-actions"><button className="nav-activity" onClick={() => setView("mine")}>My Activity{applications.some((item) => item.status === "Pending" && tasks.some((task) => String(task.id) === String(item.taskId) && task.ownerID === currentUser)) ? " •" : ""}</button></div>}</section>
         {view === "mine" ? <>
           <section className="panel activity-section posted-jobs-section"><div className="board-toolbar"><div><h2>Posted Jobs ({postedTasks.length})</h2><p>Manage jobs you posted.</p></div></div><div className="activity-list">{postedTasks.map((task) => {
             const taskApplications = applications.filter((item) => String(item.taskId) === String(task.id));
@@ -273,6 +320,15 @@ function Marketplace() {
       {selected.ownerID === currentUser && <p>You posted this job. Review applicants in My Activity.</p>}
       {selected.status !== "Open" && <p>This job is no longer accepting applications.</p>}</section></div>}
     <Footer />
+    {showAuth && (
+      <AuthModal
+        user={authUser}
+        onClose={() => setShowAuth(false)}
+        onLogin={handleLogin}
+        onLogout={handleLogout}
+        onUpdateUser={handleUpdateUser}
+      />
+    )}
   </>;
 }
 
