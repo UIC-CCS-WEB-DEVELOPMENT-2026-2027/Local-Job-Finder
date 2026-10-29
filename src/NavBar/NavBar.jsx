@@ -2,7 +2,7 @@ import { StrictMode } from "react";
 import { Link } from "react-router-dom";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./NavBar.css";
-import "/src/assets/placeholder.png";
+import "/src/assets/Localified.png";
 
 export default function NavBar({ active }) {
   let current = false;
@@ -14,7 +14,7 @@ export default function NavBar({ active }) {
     <>
       <div className="navbar">
         <div className="logo">
-          <img src="src/assets/placeholder.png"></img>
+          <img src="src/assets/Localified.png"></img>
         </div>
         <div className="buttons">
           <Link
