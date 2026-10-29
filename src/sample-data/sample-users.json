@@ -1,14 +1,14 @@
 [
   {
     "id": "user1",
-    "name": "User 1",
-    "email": "user1@example.com",
-    "contactNumber": "555-0101"
+    "name": "Ana Reyes",
+    "email": "ana@example.com",
+    "contactNumber": "0917 123 4501"
   },
   {
     "id": "user2",
-    "name": "User 2",
-    "email": "user2@example.com",
-    "contactNumber": "555-0102"
+    "name": "Ben Cruz",
+    "email": "ben@example.com",
+    "contactNumber": "0921 678 3401"
   }
 ]
