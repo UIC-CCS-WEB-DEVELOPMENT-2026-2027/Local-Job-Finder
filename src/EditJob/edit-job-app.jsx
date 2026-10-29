@@ -3,6 +3,7 @@ import { BrowserRouter, Link, Route, Routes, useLocation, useNavigate } from "re
 import initialTasks from "../modified-Jobboard/job-data.json";
 import Footer from "../Footer/main-footer.jsx";
 import "./edit-job.css";
+import MainHeader from "../modified-header/main-header.jsx";
 
 const currentUser = "demo-user";
 
@@ -154,10 +155,13 @@ function Marketplace() {
   };
 
   return <>
-    <header className="navbar">
-      <Link className="brand" to="/job-board">Local Job Finder</Link>
-      <nav className="nav-links">{view === "mine" ? !editingTask && <button className="nav-activity" onClick={() => { setView("board"); navigate("/job-board"); }}>Go Back</button> : <><Link className={!posting ? "nav-current" : "nav-muted"} to="/job-board" onClick={() => setView("board")}>Job Board</Link><Link className={posting ? "nav-current" : "nav-muted"} to="/job-posting" onClick={() => setView("board")}>Post a Job</Link><button className="nav-activity" onClick={() => setView("mine")}>My Activity{applications.some((item) => item.status === "Pending" && tasks.some((task) => task.id === item.taskId && task.ownerId === currentUser)) ? " •" : ""}</button></>}</nav>
-    </header>
+    <MainHeader
+          view={view}
+          posting={posting}
+          editingTask={editingTask}
+          onBack={() => { setView("board"); navigate("/job-board"); }}
+          onBoard={() => setView("board")}
+        />
     <main className="container">
       {showTaskForm ? <section className="panel form-panel"><h1>{editingTask ? "Edit Job" : "Post a local Job"}</h1><p>Find a hand for a one-day job or local errand.</p>
         <form className="task-form" onSubmit={saveTask}>
