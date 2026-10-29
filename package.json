@@ -1,5 +1,5 @@
 {
-  "name": "local-job-finder",
+  "name": "localified",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -11,6 +11,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.118.0",
     "json-server": "^0.17.4",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",

@@ -155,7 +155,7 @@ function Marketplace() {
 
   return <>
     <header className="navbar">
-      <Link className="brand" to="/job-board">Local Job Finder</Link>
+      <Link className="brand" to="/job-board">Localified</Link>
       <nav className="nav-links">{view === "mine" ? !editingTask && <button className="nav-activity" onClick={() => { setView("board"); navigate("/job-board"); }}>Go Back</button> : <><Link className={!posting ? "nav-current" : "nav-muted"} to="/job-board" onClick={() => setView("board")}>Job Board</Link><Link className={posting ? "nav-current" : "nav-muted"} to="/job-posting" onClick={() => setView("board")}>Post a Job</Link><button className="nav-activity" onClick={() => setView("mine")}>My Activity{applications.some((item) => item.status === "Pending" && tasks.some((task) => task.id === item.taskId && task.ownerId === currentUser)) ? " •" : ""}</button></>}</nav>
     </header>
     <main className="container">

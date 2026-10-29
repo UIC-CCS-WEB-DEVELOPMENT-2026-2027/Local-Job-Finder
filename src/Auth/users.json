@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "firstName": "Ana",
+    "lastName": "Reyes",
+    "email": "ana@example.com",
+    "birthDate": "1999-04-12",
+    "phone": "0917 123 4501",
+    "role": "client",
+    "password": "password123"
+  },
+  {
+    "id": 2,
+    "firstName": "Ben",
+    "lastName": "Cruz",
+    "email": "ben@example.com",
+    "birthDate": "1996-08-30",
+    "phone": "0921 678 3401",
+    "role": "runner",
+    "password": "password123"
+  }
+]
