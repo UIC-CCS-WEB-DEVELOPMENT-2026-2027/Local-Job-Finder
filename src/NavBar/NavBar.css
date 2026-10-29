@@ -44,7 +44,9 @@
   gap: 10px;
 }
 
-img {
-  height: auto;
-  width: 100%;
+.logo img {
+  display: block;
+  height: 36px;
+  width: auto;
+  object-fit: contain;
 }
