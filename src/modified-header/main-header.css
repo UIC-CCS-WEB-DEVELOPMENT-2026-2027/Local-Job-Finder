@@ -14,10 +14,18 @@
 }
 
 .brand {
+  display: inline-flex;
+  align-items: center;
   color: #ffb02e;
   font-weight: 800;
   font-size: 1.15rem;
   text-decoration: none;
+}
+.brand img {
+  display: block;
+  height: 36px;
+  width: auto;
+  object-fit: contain;
 }
 .nav-links {
   display: flex;
@@ -48,13 +56,22 @@
 .nav-links > .nav-muted:hover {
   background: #777;
 }
-.nav-activity {
+.nav-activity,
+.nav-account {
   padding: 9px 12px;
   border: 1px solid #f28c00;
   border-radius: 6px;
   background: transparent;
   color: white;
   cursor: pointer;
+}
+.nav-account {
+  background: #f28c00;
+  color: #211700;
+  font-weight: 700;
+}
+.nav-account:hover {
+  background: #e67e00;
 }
 .container {
   width: min(1120px, calc(100% - 32px));
