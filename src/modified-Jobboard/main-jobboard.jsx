@@ -12,7 +12,7 @@ import Footer from "../Footer/main-footer.jsx";
 import MainHeader from "../modified-header/main-header.jsx";
 import "./main-jobboard.css";
 
-const jobsUrl = "https://local-job-finder-sigma.vercel.app/";
+const jobsUrl = "http://localhost:3001/jobs";
 const AUTH_STORAGE_KEY = "localifiedAuthUser";
 const usersById = Object.fromEntries(
   sampleUsers.map((user) => [user.id, user]),
